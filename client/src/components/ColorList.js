@@ -60,11 +60,13 @@ const ColorList = ({ colors, updateColors }) => {
       .catch(error => console.log(error.response))
   };
 
-  const addColor = color => {
+  const addColor = event => {
+    event.preventDefault();
+    console.log(newColor)
     axiosWithAuth()
-      .post('http://localhost:5000/api/colors', color)
+      .post('http://localhost:5000/api/colors', newColor)
       .then(res => {
-        console.log(res)
+        console.log('POST', res)
       })
       .catch(error => console.log(error.response))
   }
