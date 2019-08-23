@@ -23,7 +23,10 @@ const ColorList = ({ colors, updateColors }) => {
       .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
         console.log('UPDATE', res);
-        updateColors([...colors]);
+        const newColors = colors.filter(col => {
+          if (col.id !== res.data.id) return col;
+        });
+        updateColors([...newColors, res.data]);
         console.log(colors)
       })
       .catch(error => console.log(error.response))
